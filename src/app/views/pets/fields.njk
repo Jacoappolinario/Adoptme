@@ -1,0 +1,103 @@
+<div class="item">
+    <div>Categoria</div>
+    <div>
+        <select name="category_id">
+            {% for category in categories %}
+            <option value="{{ category.id }}" {% if pet.category_id == category.id %} selected {% endif %}>
+                {{ category.name }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div class="item">
+    <div>Nome</div>
+    <div>
+        <input 
+        type="text"
+        name="name"
+        placeholder="Digite o nome"
+        value="{{ pet.name }}"
+        >
+    </div>
+</div>
+
+<div class="item">
+    <div>Descrição</div>
+    <div>
+        <textarea name="description">{{ pet.description }}</textarea>
+    </div>
+</div>
+
+<div class="item">
+    <div>Fotos</div>
+    <div>
+        <div id="photos-upload">
+            <input 
+            id="photos-input"
+            type="file" 
+            name="photos"
+            multiple
+            accept="image/*" 
+            onchange="PhotosUpload.handleFileInput(event)"
+            >
+
+            <p>Selecione até 6 Fotos</p>
+        </div>
+        <div id="photos-preview">
+
+        </div>
+    </div>
+</div>
+
+<div class="item">
+    <div>UF</div>
+    <div>
+        <input 
+        type="text"
+        name="uf"
+        placeholder="Digite seu estado"
+        value="{{ pet.uf }}"
+        >
+    </div>
+</div>
+
+<div class="item">
+    <div>Cidade</div>
+    <div>
+        <input 
+        type="text"
+        name="city"
+        placeholder="Digite sua cidade"
+        value="{{ pet.city }}"
+        >
+    </div>
+</div>
+
+{% if (pet.status == '1') or (pet.status == '0') %}
+<div class="item">
+    <div>Adotado?</div>
+    <div>
+        <span>
+            <input 
+            type="radio" 
+            name="status" 
+            value="1" 
+            {% if pet.status =='1' %}
+                checked
+            {% endif %}> Sim
+        </span>
+        <span>
+            <input 
+            type="radio" 
+            name="status" 
+            value="0"
+            {% if pet.status =='0' %}
+                checked
+            {% endif %}> Não
+        </span>
+    </div>
+</div>
+{% endif %}
+
