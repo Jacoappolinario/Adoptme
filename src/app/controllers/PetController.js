@@ -1,4 +1,5 @@
 const Category = require('../models/Category')
+const Pet = require('../models/Pet')
 
 module.exports = {
     async create(req, res) {
@@ -7,7 +8,18 @@ module.exports = {
 
         return res.render("pets/create.njk", { categories })
     },
-    post(req, res) {
-        return res.send(req.body)
+    async post(req, res) {
+        const keys = Object.keys(req.body)
+
+        for (key of keys) {
+            if (req.body[key] == "") {
+                return res.send("Please, fill all fields")
+            }
+        }
+
+        let results = await Pet.create(req.body)
+        const petId = results.rows[0].id
+
+        return res.send("cadastrado!")
     }
 }
