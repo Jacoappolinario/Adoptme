@@ -82,5 +82,10 @@ module.exports = {
         await Pet.update(req.body)
 
         return res.redirect(`/pets/${req.body.id}`)
+    },
+    async delete(req, res) {
+        await Pet.delete(req.body.id)
+
+        return res.redirect('/pets/create')
     }
 }

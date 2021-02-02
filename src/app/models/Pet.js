@@ -52,5 +52,8 @@ module.exports = {
         return db.query(`
         SELECT * FROM files WHERE pet_id = $1
         `, [id])
+    },
+    delete(id) {
+        return db.query(`DELETE FROM pets WHERE id = $1`, [id])
     }
 }
