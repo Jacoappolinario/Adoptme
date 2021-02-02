@@ -28,6 +28,26 @@ module.exports = {
         const filesPromise = req.files.map(file => File.create({...file, pet_id: petId}))
         await Promise.all(filesPromise)
 
-        return res.send("cadastrado!")
+        return res.redirect(`/pets/${petId}/edit`)
+    },
+    async edit(req, res) {
+        let results = await Pet.find(req.params.id)
+        const pet = results.rows[0]
+
+        if (!pet) return res.send("Pet not found")
+
+        //get categories
+        results = await Category.all()
+        const categories = results.rows
+
+        //get images
+        results = await Pet.files(pet.id)
+        let files = results.rows
+        files = files.map(file => ({
+            ...file,
+            src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+        }))
+
+        return res.render("pets/edit.njk", { pet, categories, files })
     }
 }

@@ -60,6 +60,26 @@ footer {
     transition: all 0.2s;
 }
 
+.button:hover {
+    background-color: #d7780b;
+}
+
+.button.edit {
+    background-color: var(--secondary-color);
+}
+
+.button.delete {
+    background-color: lightgray;
+}
+
+.button.edit:hover {
+    background-color: #064ac1;
+}
+
+.button.delete:hover {
+    background-color: rgb(223, 62, 62);
+}
+
 /*=== Header ===*/
 header,footer {
     background-color: black;

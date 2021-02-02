@@ -46,32 +46,19 @@
             <p>Selecione até 6 Fotos</p>
         </div>
         <div id="photos-preview">
-
+            {% if files %}
+                {% for image in files %}
+                    <div class="photo" id="{{ image.id }}">
+                        <img src="{{ image.src }}" alt="{{ image.name }}">
+                        <i class="material-icons"
+                            onclick="PhotosUpload.removeOldPhoto(event)"
+                        >close
+                        </i>
+                    </div>
+                {% endfor %}
+                <input type="hidden" name="removed_files">
+            {% endif %}
         </div>
-    </div>
-</div>
-
-<div class="item">
-    <div>UF</div>
-    <div>
-        <input 
-        type="text"
-        name="uf"
-        placeholder="Digite seu estado"
-        value="{{ pet.uf }}"
-        >
-    </div>
-</div>
-
-<div class="item">
-    <div>Cidade</div>
-    <div>
-        <input 
-        type="text"
-        name="city"
-        placeholder="Digite sua cidade"
-        value="{{ pet.city }}"
-        >
     </div>
 </div>
 
@@ -84,7 +71,7 @@
             type="radio" 
             name="status" 
             value="1" 
-            {% if pet.status =='1' %}
+            {% if pet.status =='0' %}
                 checked
             {% endif %}> Sim
         </span>
@@ -93,7 +80,7 @@
             type="radio" 
             name="status" 
             value="0"
-            {% if pet.status =='0' %}
+            {% if pet.status =='1' %}
                 checked
             {% endif %}> Não
         </span>
