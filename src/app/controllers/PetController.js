@@ -49,5 +49,38 @@ module.exports = {
         }))
 
         return res.render("pets/edit.njk", { pet, categories, files })
+    },
+    async put(req, res) {
+        const keys = Object.keys(req.body)
+
+        for (key of keys) {
+            if (req.body[key] == "" && key != "removed_files") {
+                return res.send('Please, fill all fields!')
+            }
+        }
+
+        //Insere novas imagens
+        if (req.files.length != 0) {
+            const newFilePromise = req.files.map(file => 
+                File.create({...file, pet_id: req.body.id}))
+                
+            await Promise.all(newFilePromise)
+        }
+
+        // Remove imagens
+        if (req.body.removed_files) {
+            // 1,2,3
+            const removedFiles = req.body.removed_files.split(",") // [1,2,3]
+            const lastIndex = removedFiles.length - 1 //Pega o ultimo id dentro do array
+            removedFiles.splice(lastIndex, 1) 
+
+            const removedFilesPromise = removedFiles.map(id => File.delete(id))
+
+            await Promise.all(removedFilesPromise)
+        }
+
+        await Pet.update(req.body)
+
+        return res.redirect(`/pets/${req.body.id}`)
     }
 }

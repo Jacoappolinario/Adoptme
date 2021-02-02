@@ -10,8 +10,8 @@ routes.get('/pets/create', PetController.create)
 routes.get('/pets/:id/edit', PetController.edit)
 
 routes.post('/pets', multer.array("photos", 6), PetController.post)
-// routes.put('/pets', multer.array("photos", 6), PetController.put)
-// routes.delete('/pets', PetController.delete)
+routes.put('/pets', multer.array("photos", 6), PetController.put)
+routes.delete('/pets', PetController.delete)
 
 // Alias
 routes.get('/ads/create', function(req, res) {
