@@ -100,3 +100,5 @@ const PhotosUpload = {
         photoDiv.remove()
     }
 }
+
+

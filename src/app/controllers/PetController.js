@@ -1,6 +1,7 @@
 const Category = require('../models/Category')
 const Pet = require('../models/Pet')
 const File = require('../models/File')
+const { date } = require('../../lib/utils')
 
 module.exports = {
     async create(req, res) {
@@ -29,6 +30,27 @@ module.exports = {
         await Promise.all(filesPromise)
 
         return res.redirect(`/pets/${petId}/edit`)
+    },
+    async show(req, res) {
+        let results = await Pet.find(req.params.id)
+        const pet= results.rows[0]
+
+        if (!pet) return res.send("product Not Found!")
+
+        const { day, hour, minutes, month } = date(pet.updated_at)
+
+        pet.published = {
+            day: `${day}/${month}`,
+            hour: `${hour}h${minutes}`
+        }
+
+        results = await Pet.files(pet.id)
+        const files = results.rows.map(file => ({
+            ...file,
+            src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+        }))
+
+        return res.render("pets/show", { pet, files })
     },
     async edit(req, res) {
         let results = await Pet.find(req.params.id)

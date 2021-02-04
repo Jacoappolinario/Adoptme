@@ -46,3 +46,18 @@ ALTER TABLE "pets" ADD FOREIGN KEY ("category_id") REFERENCES "categories" ("id"
 ALTER TABLE "files" ADD FOREIGN KEY ("pet_id") REFERENCES "pets" ("id");
 
 ALTER TABLE "pets" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+-- Create procedure
+CREATE FUNCTION trigger_set_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+	NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Auto updated_at pets
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON pets
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();

@@ -30,16 +30,14 @@ module.exports = {
         const query = `
             UPDATE pets SET
                 category_id=($1),
-                user_id=($2),
-                name=($3),
-                description=($4),
-                status=($5)
-            WHERE id = $6
+                name=($2),
+                description=($3),
+                status=($4)
+            WHERE id = $5
         `
 
         const values = [
             data.category_id,
-            data.user_id,
             data.name,
             data.description,
             data.status,
