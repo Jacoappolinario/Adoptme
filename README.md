@@ -31,7 +31,7 @@ sudo -u postgres psql adoptmedb -f Adoptme.sql
 
 # Obs: Você também pode importar manualmente o adoptme.sql para o Postbird.
 ```
-Adicione credenciais de acesso ao banco de dados no arquivo src / config / db.js.
+Adicione as credenciais de acesso ao banco de dados no arquivo src / config / db.js.
 
 ```bash
 # Divirta-se
