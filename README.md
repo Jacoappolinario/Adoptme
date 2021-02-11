@@ -8,7 +8,7 @@
 </h3>
 
 ## 🚀 Sobre
-Que tal dá um lar para aquele pet que você viu na rua?! Com a Adotme você consegue fazer isso. Adoptme é uma plataforma feita não somente para ongs, mais também para pessoas que queiram ajudar aquele pet que viu a econtrar um lar amoroso e seguro para ele.
+Que tal dá um lar para aquele pet que você viu na rua?! Com a Adotme você consegue fazer isso. Adoptme é uma plataforma feita não somente para ongs, mais também para pessoas que queiram ajudar aquele pet que viu a encontrar um lar amoroso e seguro para ele.
 
 ## 👷🏾‍♂️ Como usar?
 
