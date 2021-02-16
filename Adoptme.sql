@@ -29,22 +29,20 @@ CREATE TABLE "files" (
   "pet_id" int
 );
 
-CREATE TABLE "users" (
-  "id" SERIAL PRIMARY KEY,
-  "name" text NOT NULL,
-  "email" text UNIQUE NOT NULL,
-  "phone" text UNIQUE NOT NULL,
-  "password" text NOT NULL,
-  "uf" text,
-  "city" text,
-  "created_at" timestamp DEFAULT (now()),
-  "updated_at" timestamp DEFAULT (now())
-);
-
 ALTER TABLE "pets" ADD FOREIGN KEY ("category_id") REFERENCES "categories" ("id");
 
 ALTER TABLE "files" ADD FOREIGN KEY ("pet_id") REFERENCES "pets" ("id");
 
+CREATE TABLE "users" (
+  "id" SERIAL PRIMARY KEY,
+  "name" text NOT NULL,
+  "email" text UNIQUE NOT NULL,
+  "password" text NOT NULL,
+  "created_at" timestamp DEFAULT (now()),
+  "updated_at" timestamp DEFAULT (now())
+);
+
+-- foreign key
 ALTER TABLE "pets" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 -- Create procedure
@@ -59,5 +57,11 @@ $$ LANGUAGE plpgsql;
 -- Auto updated_at pets
 CREATE TRIGGER set_timestamp
 BEFORE UPDATE ON pets
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+-- Auto updated_at users
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON users
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
