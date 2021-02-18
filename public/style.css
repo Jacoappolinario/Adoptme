@@ -484,3 +484,21 @@ form .item #photos-preview img {
     font-size: 14px;
     letter-spacing: .4px;
 }
+
+/*=== User register ===*/
+.user-register.container.form {
+    max-width: 500px;
+}
+
+/* .form input[name="email"],
+.form input[name="password"],
+.form input[name="passwordRepeat"] {
+    max-width: 60%;
+} */
+
+.input .error {
+    background-color: #e74c3c;
+    padding: 4px;
+    border-radius: 4px;
+    color: white;
+}
