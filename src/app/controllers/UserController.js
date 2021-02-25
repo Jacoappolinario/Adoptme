@@ -4,8 +4,16 @@ module.exports = {
     registerForm(req, res) {
         return res.render("user/register")
     },
-    show(req, res) {
-        return res.send('ok, cadastrado!')
+    async show(req, res) {
+        const { userId: id } = req.session
+
+        const user = await User.findOne({ where: {id} })
+
+        if (!user) return res.render("user/register", {
+            error: "Usuário não encontrado!"
+        })
+
+        return res.render('user/index', { user })
     },
     async post(req, res) {
 
