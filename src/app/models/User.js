@@ -61,7 +61,7 @@ module.exports = {
                     ${key} = '${fields[key]}'
                     WHERE id = ${id}
                 `
-            }
+            } 
         })
 
         await db.query(query)
