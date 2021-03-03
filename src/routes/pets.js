@@ -4,13 +4,15 @@ const multer = require('../app/middlewares/multer')
 
 const PetController = require('../app/controllers/PetController')
 
-// Routes Pets
-routes.get('/create', PetController.create)
-routes.get('/:id', PetController.show)
-routes.get('/:id/edit', PetController.edit)
+const { onlyUsers } = require('../app/middlewares/session')
 
-routes.post('/', multer.array("photos", 6), PetController.post)
-routes.put('/', multer.array("photos", 6), PetController.put)
-routes.delete('/', PetController.delete)
+// Routes Pets
+routes.get('/create', onlyUsers, PetController.create)
+routes.get('/:id', PetController.show)
+routes.get('/:id/edit', onlyUsers, PetController.edit)
+
+routes.post('/', onlyUsers, multer.array("photos", 6), PetController.post)
+routes.put('/', onlyUsers, multer.array("photos", 6), PetController.put)
+routes.delete('/', onlyUsers, PetController.delete)
 
 module.exports = routes
