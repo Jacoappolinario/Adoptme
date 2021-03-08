@@ -1,6 +1,12 @@
 const db = require('../../config/db')
 
 module.exports = {
+    all() {
+        return db.query(`
+        SELECT * FROM pets
+        ORDER BY updated_at DESC
+        `)
+    },
     create(data) {
         const query = `
             INSERT INTO pets (
@@ -15,7 +21,7 @@ module.exports = {
 
         const values = [
             data.category_id,
-            data.user_id || 1,
+            data.user_id,
             data.name,
             data.description,
             data.status || 1

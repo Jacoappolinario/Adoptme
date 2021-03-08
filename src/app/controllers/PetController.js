@@ -22,6 +22,7 @@ module.exports = {
         if (req.files.length == 0)
             return res.send('Please, send at last one image')
 
+        req.body.user_id = req.session.userId
 
         let results = await Pet.create(req.body)
         const petId = results.rows[0].id
